@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0"
+                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                      xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0 https://maven.apache.org/xsd/archetype-descriptor-1.1.0.xsd"
+                      name="foro-arquetipo">
+
+    <requiredProperties>
+        <requiredProperty key="version">
+            <defaultValue>0.0.1-SNAPSHOT</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="puerto">
+            <defaultValue>8080</defaultValue>
+            <validationRegex>^\d{2,5}$</validationRegex>
+        </requiredProperty>
+        <requiredProperty key="descripcion">
+            <defaultValue>Microservicio del foro</defaultValue>
+        </requiredProperty>
+        <!-- ms-moderacion pasa a ser MsModeracionApplication -->
+        <requiredProperty key="clasePrincipal">
+            <defaultValue>#foreach($parte in $artifactId.split("-"))${parte.substring(0,1).toUpperCase()}${parte.substring(1)}#end</defaultValue>
+        </requiredProperty>
+        <!-- Maven ignora los archivos .gitignore y .gitattributes de la plantilla, por eso se renombran al generar -->
+        <requiredProperty key="gitignore">
+            <defaultValue>.gitignore</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="gitattributes">
+            <defaultValue>.gitattributes</defaultValue>
+        </requiredProperty>
+    </requiredProperties>
+
+    <fileSets>
+        <fileSet filtered="true" packaged="true" encoding="UTF-8">
+            <directory>src/main/java</directory>
+            <includes>
+                <include>**/*.java</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" packaged="true" encoding="UTF-8">
+            <directory>src/test/java</directory>
+            <includes>
+                <include>**/*.java</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>src/main/resources</directory>
+            <includes>
+                <include>**/*.properties</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>database</directory>
+            <includes>
+                <include>**/*.sql</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory></directory>
+            <includes>
+                <include>README.md</include>
+                <include>Dockerfile</include>
+                <include>.dockerignore</include>
+                <include>.env.example</include>
+                <include>__gitignore__</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="false" encoding="UTF-8">
+            <directory></directory>
+            <includes>
+                <include>mvnw</include>
+                <include>mvnw.cmd</include>
+                <include>__gitattributes__</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="false" encoding="UTF-8">
+            <directory>.mvn</directory>
+            <includes>
+                <include>**/*.properties</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+</archetype-descriptor>
